@@ -1,0 +1,32 @@
+<html>
+<head>
+    <h3>Making calls to Giphy api - Ryan Gosling</h3>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script>
+        $(function () {
+            $('#giphy').on("click", function () {
+                $.ajax({
+                    dataType: "JSON"
+                    , type: "get"
+                    , url: "http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=ZdaBkZMKXuclVTQVWtw9BQ4Y6hszKwdu&limit=5"
+                    , success: function (message) {
+                        console.log(message.data);
+                        for (var i = 1; i < message.data.length; i++) {
+                            $('#appendhere').append(message.data[i].title);
+                            var myImage = new Image();
+                            myImage.src = message.data[i].images.preview_gif.url;
+                            $('#image').append(myImage);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <button id="giphy">get Ryan Gifs</button>
+    <div id="appendhere" style="width :100%; color : black">
+        <div id="image"> <img src=""> </div>
+    </div>
+</body>
